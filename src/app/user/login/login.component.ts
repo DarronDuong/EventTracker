@@ -11,6 +11,8 @@ export class LoginComponent implements OnInit {
 
   password;
   userName;
+  mouseoverLogin;
+  
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
