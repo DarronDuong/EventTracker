@@ -14,7 +14,6 @@ import { appRoutes } from './routes';
 import { RouterModule } from '@angular/router';
 import { CreateEventComponent } from './events/create-event/create-event.component';
 import { Error404Component } from './errors/error404/error404.component';
-import { EventRouteActivatorService } from './events/event-details/event-route-activator.service';
 import { EventListResolver } from './events/event-list-resolver.service';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,6 +27,8 @@ import { ModalTriggerDirective } from './common/modal-trigger.directive';
 import { UpvoteComponent } from './events/upvote/upvote.component';
 import { VoterService } from './events/voter.service';
 import { LocationValidatorDirective } from './events/shared/location-validator.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { EventResolver } from './events/event-resolver.service';
 
 let toastr: Toastr = window['toastr'];
 let jQuery = window['$'];
@@ -54,13 +55,14 @@ let jQuery = window['$'];
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   providers: [
     EventService, 
     { provide: TOASTR_TOKEN, useValue:  toastr}, 
     { provide: JQ_TOKEN, useValue: jQuery},
-    EventRouteActivatorService,
+    EventResolver,
     {
       provide: 'canDeactivateCreateEvent', 
       useValue: checkDirtyState

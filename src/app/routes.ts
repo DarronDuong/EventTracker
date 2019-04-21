@@ -5,9 +5,9 @@ import { EventDetailsComponent } from './events/event-details/event-details.comp
 import { Routes } from '@angular/router';
 import { CreateEventComponent } from './events/create-event/create-event.component';
 import { Error404Component } from './errors/error404/error404.component';
-import { EventRouteActivatorService } from './events/event-details/event-route-activator.service';
 import { EventListResolver } from './events/event-list-resolver.service';
 import { CreateSessionComponent } from './events/create-session/create-session.component';
+import { EventResolver } from './events/event-resolver.service';
 
 // @NgModule({
 //   declarations: [],
@@ -18,7 +18,7 @@ import { CreateSessionComponent } from './events/create-session/create-session.c
 export const appRoutes: Routes = [
   { path: 'events/new', component: CreateEventComponent, canDeactivate: ['canDeactivateCreateEvent'] },
   { path: 'events', component: EventsListComponent, resolve: {events: EventListResolver} },
-  { path: 'events/:id', component: EventDetailsComponent, canActivate: [EventRouteActivatorService] },
+  { path: 'events/:id', component: EventDetailsComponent, resolve: {event: EventResolver} },
   { path: 'events/session/new', component: CreateSessionComponent },
 
   { path: '404', component: Error404Component},
