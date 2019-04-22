@@ -36,13 +36,13 @@ export class SessionListComponent implements OnChanges {
       this.voterService.addVoter(this.eventId, session, this.auth.currentUser.userName);
     }
 
-    if (this.sortBy === 'votes'){
-      this.visibleSessions.sort(sortByVotesDesc);
-    }
+    // if (this.sortBy === 'votes'){
+    //   this.visibleSessions.sort(sortByVotesDesc);
+    // }
   }
 
   userHasVoted(session: ISession){
-    var isVoted = this.voterService.userHasVoted(session, this.auth.currentUser.userName);
+    let isVoted = this.voterService.userHasVoted(session, this.auth.currentUser.userName);
     return isVoted;
   }
 

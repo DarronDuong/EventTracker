@@ -16,6 +16,8 @@ export class VoterService {
   }
   
   addVoter(eventId: number, session: ISession, voterName: string) {
+    
+    session.voters.push(voterName)
 
     let options = { headers: new HttpHeaders({'Content-Type': '/application/json'})};
     const url = `/api/events/${eventId}/sessions/${session.id}/voters/${voterName}`;
@@ -24,11 +26,12 @@ export class VoterService {
     .pipe(catchError(this.handleError('addVoter')))
     .subscribe();
 
-    // session.voters.push(voterName)
   }
   
   deleteVoter(eventId: number, session: ISession, voterName: string) {
     
+    session.voters = session.voters.filter(voter => voter !== voterName)
+
     let options = { headers: new HttpHeaders({'Content-Type': '/application/json'})};
     const url = `/api/events/${eventId}/sessions/${session.id}/voters/${voterName}`;
 
@@ -36,7 +39,6 @@ export class VoterService {
     .pipe(catchError(this.handleError('deleteVoter')))
     .subscribe();
 
-    // session.voters = session.voters.filter(voter => voter !== voterName)
   }
 
    //This function below can be used as template for handling error
